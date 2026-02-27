@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Proyecto: Renombrador De Fotos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ffccbc;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #d84315;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #424242;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background-color: #ffebee;
+            padding: 15px;
+            border-left: 4px solid #d32f2f;
+            border-radius: 4px;
+            margin: 20px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .link {
+            color: #d32f2f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Resumen del Proyecto:<br>Renombrador De Fotos</h1>
+        
+        <p>Este documento explica paso a paso lo que construí, cómo funciona la aplicación y cómo resolví el problema original. Está diseñado para ser comprendido fácilmente por cualquier usuario.</p>
+
+        <h2>1. El Problema Original</h2>
+        <p>Existía la necesidad de procesar miles de fotografías de productos junto con un documento de Excel/CSV (Diccionario de Datos).</p>
+        <ul>
+            <li>Las fotografías originales tenían nombres basados en el <strong>Código UPC</strong> y contenían sufijos (por ejemplo: <code>123456_1.jpg</code>).</li>
+            <li>Se necesitaba renombrar todas esas fotografías al <strong>Código Interno</strong> del sistema, buscando el equivalente en el archivo de Excel.</li>
+            <li>Hacer este cruce de información y cambio de nombre de forma manual para miles de archivos tomaría horas o días de esfuerzo humano.</li>
+        </ul>
+
+        <h2>2. La Solución que Construí</h2>
+        <p>Creé una aplicación web completamente automatizada que hace todo el trabajo en segundos. La plataforma consta de dos partes principales que trabajan en equipo:</p>
+
+        <h3>La Interfaz Web (Lo que ve el usuario)</h3>
+        <ul>
+            <li><strong>Diseño Personalizado:</strong> Creé una página web moderna con un tema rojo y naranja (cristalino y oscuro), inspirada directamente en la identidad visual de Auto Mercado.</li>
+            <li><strong>Fácil de Usar:</strong> Los usuarios no requieren conocimientos técnicos. Solo tienen que arrastrar y soltar su archivo de Excel en una caja, y todas sus fotografías en otra.</li>
+            <li><strong>Interactiva:</strong> La página se comunica con el usuario en español, mostrando mensajes de éxito, manejo de errores descriptivos y un botón de carga dinámico.</li>
+        </ul>
+
+        <h3>El Cerebro de Procesamiento (El motor invisible)</h3>
+        <ul>
+            <li><strong>Procesamiento Inteligente:</strong> Construí un robot basado en el lenguaje de programación Python.</li>
+            <li><strong>Lectura Inteligente:</strong> Cuando el servidor recibe los archivos, lee inmediatamente el documento Excel y memoriza temporalmente qué Código UPC corresponde a qué Código Interno.</li>
+            <li><strong>Limpieza y Tradución:</strong> El servidor toma cada fotografía, analiza el texto del archivo, corta inteligentemente herramientas visuales como los sufijos (ej: "<code>_1</code>" o "<code>_2</code>"), busca el nombre base en el Excel, y cambia el nombre de la foto al Código Interno correcto, manteniendo el sufijo original.</li>
+            <li><strong>Entrega Eficiente:</strong> Agrupa todas las fotos procesadas exitosamente en una carpeta llamada "Fotos Renombradas", y separa las fotos que no se encontraron en una carpeta de "Fotos No Modificadas". Finalmente, empaqueta todo en un solo archivo comprimido <code>.zip</code> para que el usuario lo descargue con un solo clic.</li>
+        </ul>
+
+        <h2>3. Publicación en la Nube (Google Cloud)</h2>
+        <p>Inicié el proyecto construyendo la herramienta en una computadora local, pero para que cualquier empleado pudiera usarla desde su propia máquina sin instalar nada, la subí a la nube profesional de Google.</p>
+
+        <ul>
+            <li><strong>Para la página visual (Página Web):</strong> Usé <strong>Firebase Hosting</strong>, un servicio de Google que entrega la página web en navegadores de forma segura y ultrarrápida.</li>
+            <li><strong>Para el cerebro de procesamiento (El motor de renombrado):</strong> Implementé <strong>Google Cloud Run</strong>. Esto me permitió crear un súper-servidor virtual. Cuando un usuario sube miles de imágenes pesadas, son los servidores de Google los que hacen el trabajo pesado de comparar y comprimir todo, logrando que el equipo del usuario no se congele ni gaste su propia memoria.</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Resultado:</strong> Me enfrenté a un reto de incompatibilidad temporal porque los procesadores de las computadoras Mac modernas (Apple Silicon) tienen un lenguaje un poco distinto a los servidores Linux de Google. Lo solucioné encapsulando mi programa en algo llamado "Contenedor Docker", un paquete universal que Google ejecutó exitosamente.
+        </div>
+
+        <h2>4. Estado Actual</h2>
+        <p>¡La aplicación está 100% terminada, pulida y funcional en vivo!</p>
+        <p>Cualquier persona autorizada puede acceder al enlace, subir su diccionario de códigos, sus miles de fotografías de la sesión, y recibir un archivo con todo su inventario perfectamente nombrado en cuestión de segundos.</p>
+        
+        <p style="text-align: center; margin-top: 40px;">
+            <a href="https://photo-renamer-cc4cc.web.app" target="_blank" class="link">Ir a la Aplicación en Vivo: https://photo-renamer-cc4cc.web.app</a>
+        </p>
+    </div>
+
+</body>
+</html>
