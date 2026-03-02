@@ -5,6 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('upload-form');
     const errorMsg = document.getElementById('error-msg');
 
+    // Modal elements
+    const dictInfoBtn = document.getElementById('dict-info-btn');
+    const dictInfoModal = document.getElementById('dict-info-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    // Modal Logic
+    dictInfoBtn.addEventListener('click', () => {
+        dictInfoModal.classList.add('active');
+    });
+
+    modalCloseBtn.addEventListener('click', () => {
+        dictInfoModal.classList.remove('active');
+    });
+
+    dictInfoModal.addEventListener('click', (e) => {
+        if (e.target === dictInfoModal) {
+            dictInfoModal.classList.remove('active');
+        }
+    });
+
     // Setup drag and drop UI logic
     function setupDropzone(inputId, dropzoneId, statusId, isMultiple) {
         const input = document.getElementById(inputId);

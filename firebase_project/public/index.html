@@ -34,7 +34,16 @@
                         <polyline points="10 9 9 9 8 9"></polyline>
                     </svg>
                 </div>
-                <h3>1. Subir Diccionario</h3>
+                <div class="header-with-info">
+                    <h3>1. Subir Diccionario</h3>
+                    <button type="button" class="info-btn" id="dict-info-btn" aria-label="Información sobre el diccionario">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </button>
+                </div>
                 <p>Arrastre y suelte su archivo .csv o .xlsx</p>
                 <input type="file" id="dict-input" name="dictionary" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 <span class="file-status" id="dict-status">Ningún archivo seleccionado</span>
@@ -63,6 +72,53 @@
             <div class="error-msg" id="error-msg"></div>
         </form>
     </main>
+
+    <!-- Dictionary Info Modal -->
+    <div id="dict-info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Cerrar">&times;</button>
+            <h2>Sobre el Diccionario UPC</h2>
+            <div class="modal-body">
+                <p>El diccionario es fundamental para renombrar sus fotografías. Nos ayuda a mapear los nombres de archivo actuales con su código de barras (UPC) correspondiente.</p>
+                
+                <div class="info-box">
+                    <strong>¿Dónde encontrarlo?</strong>
+                    <p>Puede encontrar el diccionario principal en el PBI de Auto En Linea, en la hoja <em>Automatizacion Fotos AEL</em>. Solo necesita hacer clic en "Exportar archivo" (.xlsx o .csv) y arrastrarlo a nuestra caja.</p>
+                </div>
+
+                <div class="custom-dict-info">
+                    <strong>Crear su propio diccionario</strong>
+                    <p>Si no desea descargar el diccionario principal, puede crear el suyo propio. Su archivo (Excel o CSV) debe contener obligatoriamente estas columnas:</p>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>UPC</th>
+                                    <th>NombreArchivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>7441003502573</td>
+                                    <td>foto1.jpg</td>
+                                </tr>
+                                <tr>
+                                    <td>012000000133</td>
+                                    <td>IMG_2024.png</td>
+                                </tr>
+                                <tr>
+                                    <td>8410113000574</td>
+                                    <td>producto_frente.jpg</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="modal-note">* El nombre de la columna debe ser exacto (sin espacios adicionales).</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="script.js"></script>
